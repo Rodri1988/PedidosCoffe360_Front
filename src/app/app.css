@@ -1,0 +1,121 @@
+/* VARIABLES ESTILO STARBUCKS */
+:root {
+  --sb-green: #006241;
+  --sb-green-light: #1e3932;
+  --bg-light: #f9f9f9;
+  --text-dark: #212121;
+  --gray-border: #e0e0e0;
+}
+
+body, html {
+  margin: 0; padding: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-dark);
+  height: 100%;
+}
+
+/* IMAGEN DE FONDO GLOBAL */
+.app-background {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2071&auto=format&fit=crop') no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+  filter: brightness(0.6) blur(2px);
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* EFECTO CRISTAL / MINIMALISMO */
+.shadow-glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+/* --- BOTONES --- */
+.btn {
+  padding: 10px 18px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;
+}
+.btn:disabled { opacity: 0.6; cursor: wait; }
+.btn:active:not(:disabled) { transform: scale(0.97); }
+
+/* Corrección: Letras y bordes verdes, fondo transparente */
+.btn-starbucks-main { 
+  background-color: transparent; 
+  color: var(--sb-green); 
+  font-size: 1.1rem; 
+  padding: 12px 24px; 
+  border: 2px solid var(--sb-green);
+}
+.btn-starbucks-main:hover:not(:disabled) { 
+  background-color: #f1f8f5; 
+}
+
+.btn-dark { 
+  background-color: transparent; 
+  color: var(--sb-green-light); 
+  border: 2px solid var(--sb-green-light); 
+}
+.btn-dark:hover:not(:disabled) { 
+  background-color: #f1f8f5; 
+}
+
+.btn-outline { background-color: transparent; border: 1px solid var(--gray-border); color: var(--text-dark); }
+.btn-outline:hover { background-color: #f1f1f1; }
+.btn-action { background-color: #f1f8f5; color: var(--sb-green); border: 1px solid var(--sb-green); flex: 1; }
+.btn-danger { background-color: transparent; color: #d32f2f; border: 1px solid #d32f2f; }
+
+/* --- PÁGINA 1: LOGIN --- */
+.login-view {
+  display: flex; justify-content: center; align-items: center; height: 100vh;
+}
+.login-card {
+  text-align: center; padding: 50px; width: 100%; max-width: 400px;
+}
+.logo-icon { font-size: 4rem; margin-bottom: 10px; }
+.login-card h1 { color: var(--sb-green); margin: 0 0 10px 0; font-size: 1.8rem; }
+.login-card p { color: #666; margin-bottom: 30px; }
+
+/* --- PÁGINA 2: DASHBOARD --- */
+.dashboard-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 15px 40px; margin-bottom: 30px; border-radius: 0 0 12px 12px;
+}
+.brand-small { display: flex; align-items: center; gap: 10px; color: var(--sb-green); }
+.brand-small h2 { margin: 0; font-size: 1.4rem; }
+.logo-icon-small { font-size: 1.5rem; }
+
+.dashboard-content { max-width: 1000px; margin: 0 auto; padding: 0 20px 40px 20px; }
+
+/* CONTROLES TOP (Consultar y Crear) */
+.controls-card { padding: 20px; margin-bottom: 25px; }
+.actions-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap;}
+.divider { width: 1px; height: 40px; background-color: var(--gray-border); }
+.create-group { display: flex; gap: 10px; flex: 1; }
+.input-modern { flex: 1; padding: 12px; border: 1px solid var(--gray-border); border-radius: 8px; outline: none; }
+.input-modern:focus { border-color: var(--sb-green); }
+
+/* CARGA Y ERROR */
+.loader-box { padding: 15px; text-align: center; color: var(--sb-green); font-weight: bold; margin-bottom: 20px; }
+.error-box { padding: 15px; background-color: #ffebee; color: #c62828; margin-bottom: 20px; border-radius: 8px;}
+
+/* GRILLA DE PEDIDOS */
+.orders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.order-card { padding: 20px; display: flex; flex-direction: column; }
+.card-head { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.9rem; color: #777;}
+.order-number { font-weight: bold; }
+.product-name { margin: 0 0 20px 0; font-size: 1.4rem; color: var(--sb-green-light); }
+.card-actions { display: flex; gap: 10px; margin-top: auto; }
+
+/* BADGES ESTADO */
+.badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
+.status-badge.PREPARANDO { background-color: #fff3e0; color: #e65100; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;}
+.status-badge.LISTO_PARA_RETIRO { background-color: #e8f5e9; color: var(--sb-green); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;}
+.status-badge.ENTREGADO { background-color: #f5f5f5; color: #9e9e9e; text-decoration: line-through; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem;}
+
+/* ESTADO VACÍO */
+.empty-state { padding: 40px; text-align: center; color: #666; }
