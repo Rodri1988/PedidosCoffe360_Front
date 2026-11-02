@@ -47,7 +47,15 @@ export class App implements OnInit {
   async verSesion() {
     try {
       const user = await getCurrentUser();
-      this.usuario = user.username;
+      // Intentamos mostrar el nombre o email desde los claims del token;
+      // si no estan, caemos al username de Cognito.
+      try {
+        const session = await fetchAuthSession();
+        const claims: any = session.tokens?.idToken?.payload ?? {};
+        this.usuario = claims['name'] ?? claims['given_name'] ?? claims['email'] ?? user.username;
+      } catch {
+        this.usuario = user.username;
+      }
       this.autenticado = true;
       // NOTA: Aquí NO consultamos los pedidos automáticamente por petición tuya.
       this.cdr.detectChanges(); 
