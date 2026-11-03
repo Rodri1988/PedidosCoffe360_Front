@@ -47,6 +47,11 @@
             
             <!-- Formulario Crear (A la derecha) -->
             <div class="create-group">
+              <select [(ngModel)]="nuevoTipo" class="select-modern" [disabled]="cargandoPedidos">
+                @for (t of tipos; track t) {
+                  <option [value]="t">{{ t }}</option>
+                }
+              </select>
               <input type="text" [(ngModel)]="nuevoProducto" placeholder="Ej: Caramel Macchiato Venti" class="input-modern" [disabled]="cargandoPedidos">
               <button class="btn btn-dark" (click)="crearPedido()" [disabled]="cargandoPedidos || !nuevoProducto">➕ Crear</button>
             </div>

@@ -18,6 +18,8 @@ export class App implements OnInit {
   cargandoPedidos = false;
   errorPedidos = '';
   nuevoProducto = '';
+  tipos = ['espresso', 'americano', 'latte', 'capuccino', 'mocha'];
+  nuevoTipo = 'espresso';
 
   constructor(private pedidosService: PedidosService, private cdr: ChangeDetectorRef) {}
 
@@ -92,6 +94,7 @@ export class App implements OnInit {
     
     const nuevo = {
       id: Math.floor(Math.random() * 1000) + 10, 
+      tipo: this.nuevoTipo,
       producto: this.nuevoProducto,
       estado: 'PREPARANDO'
     };
@@ -112,7 +115,7 @@ export class App implements OnInit {
   actualizarPedido(id: number, estadoActual: string) {
     this.cargandoPedidos = true;
     this.cdr.detectChanges();
-    const nuevoEstado = estadoActual === 'PREPARANDO' ? 'LISTO_PARA_RETIRO' : 'ENTREGADO';
+    const nuevoEstado = estadoActual === 'PREPARANDO' ? 'LISTO' : 'ENTREGADO';
     
     this.pedidosService.actualizarPedido(id, nuevoEstado).subscribe({
       next: () => this.consultarPedidos(),
