@@ -1,100 +1,78 @@
-<!-- FONDO GLOBAL ESTILO STARBUCKS -->
-<div class="app-background"></div>
-
 <div class="app-container">
-  
-  <!-- PÁGINA 1: PANTALLA DE INICIO DE SESIÓN -->
+
   @if (!autenticado) {
     <div class="login-view">
-      <div class="login-card shadow-glass">
-        <div class="logo-icon">☕</div>
-        <h1>Pedidos Coffee 360</h1>
-        <p>Sistema de gestión de barra</p>
-        <button class="btn btn-starbucks-main" (click)="login()">Iniciar Sesión</button>
+      <div class="login-card">
+        <h1>Coffee 360</h1>
+        <p>Sistema de pedidos de barra</p>
+        <button class="btn btn-primary" (click)="login()">Iniciar sesión</button>
       </div>
     </div>
-  } 
+  }
 
-  <!-- PÁGINA 2: DASHBOARD (Solo visible si estás logueado) -->
   @else {
     <div class="dashboard-view">
-      
-      <!-- Barra superior -->
-      <header class="dashboard-header shadow-glass">
-        <div class="brand-small">
-          <span class="logo-icon-small">☕</span>
-          <h2>Coffee 360</h2>
-        </div>
+
+      <header class="dashboard-header">
+        <h2 class="brand">Coffee 360</h2>
         <div class="user-menu">
           <span class="greeting">Hola, <strong>{{usuario}}</strong></span>
-          <button class="btn btn-outline" (click)="logout()">Cerrar Sesión</button>
+          <button class="btn btn-ghost" (click)="logout()">Cerrar sesión</button>
         </div>
       </header>
 
-      <!-- Contenido Principal -->
       <main class="dashboard-content">
-        
-        <!-- Tarjeta de Controles -->
-        <div class="controls-card shadow-glass">
-          <div class="actions-row">
-            
-            <!-- Botón Consultar (A la izquierda) -->
-            <button class="btn btn-starbucks-main" (click)="consultarPedidos()" [disabled]="cargandoPedidos">
-              {{ pedidos.length > 0 ? '↻ Actualizar Fila' : '📋 Consultar Pedidos' }}
-            </button>
-            
-            <div class="divider"></div>
-            
-            <!-- Formulario Crear (A la derecha) -->
-            <div class="create-group">
-              <select [(ngModel)]="nuevoTipo" class="select-modern" [disabled]="cargandoPedidos">
-                @for (t of tipos; track t) {
-                  <option [value]="t">{{ t }}</option>
-                }
-              </select>
-              <input type="text" [(ngModel)]="nuevaUbicacion" placeholder="Ej: Mesa 5" class="input-modern" [disabled]="cargandoPedidos">
-              <input type="text" [(ngModel)]="nuevaDescripcion" placeholder="Ej: Latte Vainilla sin azucar" class="input-modern" [disabled]="cargandoPedidos">
-              <button class="btn btn-dark" (click)="crearPedido()" [disabled]="cargandoPedidos || !nuevaUbicacion || !nuevaDescripcion">➕ Crear</button>
-            </div>
 
+        <section class="controls">
+          <h3 class="section-title">Nuevo pedido</h3>
+          <div class="create-group">
+            <select [(ngModel)]="nuevoTipo" class="select-modern" [disabled]="cargandoPedidos">
+              @for (t of tipos; track t) {
+                <option [value]="t">{{ t }}</option>
+              }
+            </select>
+            <input type="text" [(ngModel)]="nuevaUbicacion" placeholder="Ubicación (ej: Mesa 5)" class="input-modern" [disabled]="cargandoPedidos">
+            <input type="text" [(ngModel)]="nuevaDescripcion" placeholder="Descripción (ej: Latte vainilla)" class="input-modern" [disabled]="cargandoPedidos">
+            <button class="btn btn-primary" (click)="crearPedido()" [disabled]="cargandoPedidos || !nuevaUbicacion || !nuevaDescripcion">Crear</button>
           </div>
-        </div>
+        </section>
 
-        <!-- Alertas y Carga -->
+        <section class="list-head">
+          <h3 class="section-title">Pedidos</h3>
+          <button class="btn btn-outline" (click)="consultarPedidos()" [disabled]="cargandoPedidos">
+            {{ pedidos.length > 0 ? 'Actualizar' : 'Consultar pedidos' }}
+          </button>
+        </section>
+
         @if (cargandoPedidos) {
-          <div class="loader-box shadow-glass">☕ Conectando con la barra...</div>
+          <div class="notice">Conectando con la barra...</div>
         }
         @if (errorPedidos) {
-          <div class="error-box shadow-glass">⚠️ {{errorPedidos}}</div>
+          <div class="notice notice-error">{{errorPedidos}}</div>
         }
 
-        <!-- Grilla de Pedidos -->
         <div class="orders-grid">
           @for(pedido of pedidos; track pedido.id){
-            <article class="order-card shadow-glass">
+            <article class="order-card">
               <div class="card-head">
                 <span class="order-number">#{{pedido.id}}</span>
-                <span class="status-badge" [class]="pedido.estado">{{pedido.estado.replace('_', ' ')}}</span>
+                <span class="status-badge" [class]="pedido.estado">{{pedido.estado?.replace('_', ' ')}}</span>
               </div>
-              
-              <!-- Nombres de café dinámicos para los pedidos antiguos sin nombre -->
-              <h3 class="product-name">
-                {{ pedido.descripcion }}
-              </h3>
-              <p class="order-location">📍 {{ pedido.ubicacion }}</p>
-              
+
+              <h3 class="product-name">{{ pedido.descripcion }}</h3>
+              <p class="order-location">{{ pedido.tipo }} · {{ pedido.ubicacion }}</p>
+
               <div class="card-actions">
-                <button class="btn btn-action" (click)="actualizarPedido(pedido.id, pedido.estado)" [disabled]="cargandoPedidos">Avanzar Estado</button>
-                <button class="btn btn-danger" (click)="eliminarPedido(pedido.id)" [disabled]="cargandoPedidos">Eliminar</button>
+                <button class="btn btn-outline btn-small" (click)="actualizarPedido(pedido.id, pedido.estado)" [disabled]="cargandoPedidos">Avanzar estado</button>
+                <button class="btn btn-danger btn-small" (click)="eliminarPedido(pedido.id)" [disabled]="cargandoPedidos">Eliminar</button>
               </div>
             </article>
           }
         </div>
-        
-        <!-- Mensaje si la lista está vacía -->
+
         @if (pedidos.length === 0 && !cargandoPedidos) {
-          <div class="empty-state shadow-glass">
-            <p>La barra está limpia. Presiona "Consultar Pedidos" para revisar la base de datos.</p>
+          <div class="empty-state">
+            <p>No hay pedidos para mostrar. Presiona "Consultar pedidos".</p>
           </div>
         }
 
