@@ -1,22 +1,3 @@
-:root {
-  --green: #006341;
-  --ink: #242221;
-  --muted: #6b6b6b;
-  --paper: #f2f0eb;
-  --white: #ffffff;
-  --line: #e3e0d9;
-  --danger: #b3261e;
-}
-
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: var(--ink);
-  background: var(--paper);
-  min-height: 100%;
-}
-
 .app-container { min-height: 100vh; }
 
 /* Botones */
@@ -43,8 +24,8 @@ body, html {
 .btn-small { padding: 8px 16px; font-size: 0.85rem; }
 
 /* Login */
-.login-view { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-.login-card { text-align: center; padding: 24px; }
+.login-view { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: var(--green-dark); }
+.login-card { text-align: center; padding: 48px 56px; background: var(--white); border-radius: 20px; box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
 .login-card h1 { margin: 0 0 8px; font-size: 2.4rem; font-weight: 700; color: var(--green); }
 .login-card p { margin: 0 0 32px; color: var(--muted); }
 
@@ -54,24 +35,25 @@ body, html {
   justify-content: space-between;
   align-items: center;
   padding: 18px 40px;
-  background: var(--white);
-  border-bottom: 1px solid var(--line);
+  background: var(--green-dark);
 }
-.brand { margin: 0; font-size: 1.3rem; color: var(--green); }
+.brand { margin: 0; font-size: 1.3rem; color: var(--white); }
 .user-menu { display: flex; align-items: center; gap: 16px; }
-.greeting { color: var(--muted); }
+.greeting { color: rgba(255, 255, 255, 0.85); }
+.dashboard-header .btn-ghost { color: var(--white); border-color: rgba(255, 255, 255, 0.5); }
+.dashboard-header .btn-ghost:hover { background: rgba(255, 255, 255, 0.12); }
 
 /* Contenido */
 .dashboard-content { max-width: 960px; margin: 0 auto; padding: 40px 24px 64px; }
-.section-title { margin: 0 0 16px; font-size: 1.1rem; font-weight: 700; }
+.section-title { margin: 0 0 16px; font-size: 1.1rem; font-weight: 700; color: var(--green-dark); }
 
-.controls { margin-bottom: 40px; }
+.controls { margin-bottom: 36px; padding: 24px; background: var(--white); border: 1px solid var(--line); border-left: 5px solid var(--green); border-radius: 16px; }
 .create-group { display: flex; gap: 12px; flex-wrap: wrap; }
 .input-modern, .select-modern {
   padding: 11px 16px;
   border: 1px solid var(--line);
   border-radius: 50px;
-  background: var(--white);
+  background: var(--paper);
   font-size: 0.95rem;
   color: var(--ink);
   outline: none;
@@ -94,10 +76,12 @@ body, html {
   padding: 20px;
   background: var(--white);
   border: 1px solid var(--line);
+  border-top: 4px solid var(--green);
   border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(30, 57, 50, 0.08);
 }
 .card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.order-number { color: var(--muted); font-size: 0.9rem; }
+.order-number { color: var(--green); font-size: 0.95rem; font-weight: 700; }
 .product-name { margin: 0 0 4px; font-size: 1.15rem; font-weight: 600; }
 .order-location { margin: 0 0 20px; color: var(--muted); font-size: 0.9rem; text-transform: capitalize; }
 .card-actions { display: flex; gap: 8px; margin-top: auto; }
@@ -112,7 +96,8 @@ body, html {
   color: var(--muted);
 }
 .status-badge.PREPARANDO { background: #fff1de; color: #b25e00; }
-.status-badge.LISTO, .status-badge.LISTO_PARA_RETIRO { background: #e3f1ea; color: var(--green); }
+.status-badge.LISTO, .status-badge.LISTO_PARA_RETIRO { background: var(--green-soft); color: var(--green); }
+.status-badge.CREADO { background: #e6eefb; color: #2456a6; }
 .status-badge.ENTREGADO { background: #eceae4; color: #9a978f; }
 
 .empty-state { padding: 48px 0; text-align: center; color: var(--muted); }
