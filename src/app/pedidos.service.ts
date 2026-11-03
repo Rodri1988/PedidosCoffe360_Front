@@ -24,6 +24,6 @@ export class PedidosService {
 
     // NUEVO: Método DELETE
     eliminarPedido(id: number) {
-        return this.http.delete<any>(`${this.apiUrl}/${id}`);
+        return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
     }
 }
