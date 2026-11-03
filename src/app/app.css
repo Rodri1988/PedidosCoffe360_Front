@@ -98,6 +98,7 @@ body, html {
 .create-group { display: flex; gap: 10px; flex: 1; }
 .input-modern { flex: 1; padding: 12px; border: 1px solid var(--gray-border); border-radius: 8px; outline: none; }
 .input-modern:focus { border-color: var(--sb-green); }
+.order-location { margin: 0 0 12px; color: #6b6b6b; font-size: 0.9rem; }
 .select-modern { padding: 12px; border: 1px solid var(--gray-border); border-radius: 8px; outline: none; background: #fff; text-transform: capitalize; }
 
 /* CARGA Y ERROR */

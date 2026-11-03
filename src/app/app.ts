@@ -17,7 +17,8 @@ export class App implements OnInit {
   pedidos: any[] = [];
   cargandoPedidos = false;
   errorPedidos = '';
-  nuevoProducto = '';
+  nuevaUbicacion = '';
+  nuevaDescripcion = '';
   tipos = ['espresso', 'americano', 'latte', 'capuccino', 'mocha'];
   nuevoTipo = 'espresso';
 
@@ -88,20 +89,22 @@ export class App implements OnInit {
   }
 
   crearPedido() {
-    if (!this.nuevoProducto) return; 
+    if (!this.nuevaUbicacion || !this.nuevaDescripcion) return; 
     this.cargandoPedidos = true;
     this.cdr.detectChanges();
     
     const nuevo = {
       id: Math.floor(Math.random() * 1000) + 10, 
       tipo: this.nuevoTipo,
-      producto: this.nuevoProducto,
+      ubicacion: this.nuevaUbicacion,
+      descripcion: this.nuevaDescripcion,
       estado: 'PREPARANDO'
     };
     
     this.pedidosService.crearPedido(nuevo).subscribe({
       next: () => {
-        this.nuevoProducto = ''; 
+        this.nuevaUbicacion = '';
+        this.nuevaDescripcion = '';
         this.consultarPedidos(); 
       },
       error: (error) => {

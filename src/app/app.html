@@ -52,8 +52,9 @@
                   <option [value]="t">{{ t }}</option>
                 }
               </select>
-              <input type="text" [(ngModel)]="nuevoProducto" placeholder="Ej: Caramel Macchiato Venti" class="input-modern" [disabled]="cargandoPedidos">
-              <button class="btn btn-dark" (click)="crearPedido()" [disabled]="cargandoPedidos || !nuevoProducto">➕ Crear</button>
+              <input type="text" [(ngModel)]="nuevaUbicacion" placeholder="Ej: Mesa 5" class="input-modern" [disabled]="cargandoPedidos">
+              <input type="text" [(ngModel)]="nuevaDescripcion" placeholder="Ej: Latte Vainilla sin azucar" class="input-modern" [disabled]="cargandoPedidos">
+              <button class="btn btn-dark" (click)="crearPedido()" [disabled]="cargandoPedidos || !nuevaUbicacion || !nuevaDescripcion">➕ Crear</button>
             </div>
 
           </div>
@@ -78,8 +79,9 @@
               
               <!-- Nombres de café dinámicos para los pedidos antiguos sin nombre -->
               <h3 class="product-name">
-                {{ pedido.producto ? pedido.producto : '☕ ' + (['Caramel Macchiato', 'Latte Vainilla', 'Espresso Americano', 'Mocha Blanco', 'Frappuccino', 'Cappuccino'][pedido.id % 6]) }}
+                {{ pedido.descripcion }}
               </h3>
+              <p class="order-location">📍 {{ pedido.ubicacion }}</p>
               
               <div class="card-actions">
                 <button class="btn btn-action" (click)="actualizarPedido(pedido.id, pedido.estado)" [disabled]="cargandoPedidos">Avanzar Estado</button>
