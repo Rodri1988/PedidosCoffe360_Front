@@ -74,7 +74,7 @@ export class App implements OnInit {
 
     this.pedidosService.obtenerPedidos().subscribe({
       next: (data) => {
-        this.pedidos = data;
+        this.pedidos = data ?? [];
         this.cargandoPedidos = false;
         this.cdr.detectChanges(); // Dibuja los pedidos al instante
       },
