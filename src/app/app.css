@@ -29,14 +29,6 @@
   min-height: 100vh;
 }
 
-/* EFECTO CRISTAL / MINIMALISMO */
-.shadow-glass {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
 /* --- BOTONES --- */
 .btn {
   padding: 10px 18px;
@@ -59,8 +51,7 @@
 /* Corrección: Letras y bordes verdes, fondo transparente */
 .btn-starbucks-main {
   background-color: var(--amarillo-patito);
-  color: #000;
-  font-size: 1.1rem;
+  color: var(--azul-brigido);
   padding: 12px 20px;
   border: 2px solid var(--amarillo-patito);
 }
@@ -72,35 +63,49 @@
 }
 
 .btn-dark {
-  background-color: transparent;
-  color: var(--sb-green-light);
-  border: 2px solid var(--sb-green-light);
+  background-color: var(--azul-brigido);
+  color: var(--amarillo-patito);
+  border: 2px solid var(--azul-brigido);
 }
 
 .btn-dark:hover:not(:disabled) {
-  background-color: #f1f8f5;
+  background-color: var(--amarillo-patito);
+  color: var(--azul-brigido);
+  border: 1px solid var(--amarillo-patito);
 }
 
 .btn-outline {
   background-color: transparent;
-  border: 1px solid var(--gray-border);
-  color: var(--text-dark);
+  border: 1px solid var(--amarillo-patito);
+  color: var(--azul-brigido);
 }
 
 .btn-outline:hover {
-  background-color: #f1f1f1;
+  background-color: var(--amarillo-patito);
+  color: var(--azul-brigido);
 }
 
 .btn-action {
   background-color: var(--amarillo-patito);
   color: var(--sb-green);
+  font-weight: bold;
   border: 1px solid var(--sb-green);
   flex: 1;
+}
+
+.btn-action:hover {
+  background-color: var(--verde-bonito);
 }
 
 .btn-danger {
   background-color: transparent;
   color: #d32f2f;
+  border: 1px solid #d32f2f;
+}
+
+.btn-danger:hover {
+  background-color: #d32f2f;
+  color: var(--amarillo-patito);
   border: 1px solid #d32f2f;
 }
 
@@ -128,7 +133,7 @@
   width: 450px;
   background-color: var(--lilac);
   position: relative;
-  border-radius: 0; 
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -136,16 +141,18 @@
 
 .logo-icon {
   position: absolute;
-  top: 80px;
-  right: 20px;
-  font-size: 8rem;
+  top: 40px;
+  right: -50px;
+  font-size: 7rem;
   display: inline-block;
   transform-origin: 50% 80%;
   animation: balanceo 3s ease-in-out infinite;
 }
 
 @keyframes balanceo {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(-8deg);
   }
 
@@ -191,25 +198,36 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
+  padding: 15px 10px;
   margin-bottom: 30px;
-  border-radius: 0 0 12px 12px;
+}
+
+.greeting {
+  margin-right: 10px;
+  color: var(--azul-brigido);
 }
 
 .brand-small {
   display: flex;
-  align-items: center;
+  align-items: top;
   gap: 10px;
-  color: var(--sb-green);
+  color: var(--azul-brigido);
+  font-family: "Climate Crisis", sans-serif;
+  position: relative;
 }
 
 .brand-small h2 {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 2rem;
+}
+
+.brand-small .coffee-icon {
+  position: inherit;
+  bottom: 5px;
 }
 
 .logo-icon-small {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .dashboard-content {
@@ -259,9 +277,16 @@
 .loader-box {
   padding: 15px;
   text-align: center;
-  color: var(--sb-green);
+  color: var(--azul-brigido);
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+.coffee-icon {
+  font-size: 2rem;
+  display: inline-block;
+  transform-origin: 50% 80%;
+  animation: balanceo 3s ease-in-out infinite;
 }
 
 .error-box {
@@ -283,6 +308,8 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
+  background-color: var(--amarillo-patito);
+  border-radius: 10px;
 }
 
 .card-head {
@@ -290,7 +317,7 @@
   justify-content: space-between;
   margin-bottom: 15px;
   font-size: 0.9rem;
-  color: #777;
+  color: var(--azul-brigido);
 }
 
 .order-number {
@@ -300,7 +327,7 @@
 .product-name {
   margin: 0 0 20px 0;
   font-size: 1.4rem;
-  color: var(--sb-green-light);
+  color: var(--azul-brigido);
 }
 
 .card-actions {
