@@ -19,6 +19,7 @@ export class App implements OnInit {
   errorPedidos = '';
   nuevaUbicacion = '';
   nuevaDescripcion = '';
+  nuevoDecaf = false;
   tipos = ['espresso', 'americano', 'latte', 'capuccino', 'mocha'];
   nuevoTipo = 'espresso';
 
@@ -98,6 +99,7 @@ export class App implements OnInit {
       tipo: this.nuevoTipo,
       ubicacion: this.nuevaUbicacion,
       descripcion: this.nuevaDescripcion,
+      decaf: this.nuevoDecaf,
       estado: 'PREPARANDO'
     };
     
@@ -105,6 +107,7 @@ export class App implements OnInit {
       next: () => {
         this.nuevaUbicacion = '';
         this.nuevaDescripcion = '';
+        this.nuevoDecaf = false;
         this.consultarPedidos(); 
       },
       error: (error) => {

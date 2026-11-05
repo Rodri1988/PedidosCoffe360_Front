@@ -1,20 +1,19 @@
 :root {
-  --green: #006341;
-  --green-dark: #1e3932;
-  --green-soft: #e3f1ea;
-  --ink: #242221;
-  --muted: #6b6b6b;
-  --paper: #f2f0eb;
-  --white: #ffffff;
-  --line: #e3e0d9;
-  --danger: #b3261e;
+  --sb-green: #006241;
+  --sb-green-light: #1e3932;
+  --bg-light: #f9f9f9;
+  --text-dark: #212121;
+  --gray-border: #e0e0e0;
+  --amarillo-patito: #e8f793;
+  --verde-bonito: #6ff083;
+  --lilac: #cc8afb;
+  --azul-brigido: #1b18ea;
 }
 
-html, body {
+body, html {
   margin: 0;
   padding: 0;
-  min-height: 100%;
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: var(--ink);
-  background: var(--paper);
+  color: var(--text-dark);
+  height: 100%;
 }

@@ -1,108 +1,419 @@
-.app-container { min-height: 100vh; }
-
-/* Botones */
-.btn {
-  padding: 10px 22px;
-  border-radius: 50px;
-  border: 1px solid transparent;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  background: none;
-  color: var(--ink);
-  transition: background-color 0.15s, color 0.15s;
+/* FONT */
+.climate-crisis {
+  font-family: "Climate Crisis", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "YEAR" 1979;
 }
-.btn:disabled { opacity: 0.5; cursor: wait; }
-.btn-primary { background: var(--green); color: var(--white); }
-.btn-primary:hover:not(:disabled) { background: #004d33; }
-.btn-outline { border-color: var(--green); color: var(--green); }
-.btn-outline:hover:not(:disabled) { background: rgba(0, 99, 65, 0.08); }
-.btn-ghost { color: var(--muted); }
-.btn-ghost:hover { color: var(--ink); }
-.btn-danger { color: var(--danger); }
-.btn-danger:hover:not(:disabled) { background: rgba(179, 38, 30, 0.08); }
-.btn-small { padding: 8px 16px; font-size: 0.85rem; }
 
-/* Login */
-.login-view { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: var(--green-dark); }
-.login-card { text-align: center; padding: 48px 56px; background: var(--white); border-radius: 20px; box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
-.login-card h1 { margin: 0 0 8px; font-size: 2.4rem; font-weight: 700; color: var(--green); }
-.login-card p { margin: 0 0 32px; color: var(--muted); }
+/* IMAGEN DE FONDO GLOBAL */
+.app-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+  z-index: -1;
+}
 
-/* Encabezado */
+.app-background.solido {
+  background: var(--lilac);
+  filter: none;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* EFECTO CRISTAL / MINIMALISMO */
+.shadow-glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* --- BOTONES --- */
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Corrección: Letras y bordes verdes, fondo transparente */
+.btn-starbucks-main {
+  background-color: var(--amarillo-patito);
+  color: #000;
+  font-size: 1.1rem;
+  padding: 12px 20px;
+  border: 2px solid var(--amarillo-patito);
+}
+
+.btn-starbucks-main:hover:not(:disabled) {
+  background-color: var(--azul-brigido);
+  border: 2px solid var(--azul-brigido);
+  color: var(--amarillo-patito);
+}
+
+.btn-dark {
+  background-color: transparent;
+  color: var(--sb-green-light);
+  border: 2px solid var(--sb-green-light);
+}
+
+.btn-dark:hover:not(:disabled) {
+  background-color: #f1f8f5;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--gray-border);
+  color: var(--text-dark);
+}
+
+.btn-outline:hover {
+  background-color: #f1f1f1;
+}
+
+.btn-action {
+  background-color: var(--amarillo-patito);
+  color: var(--sb-green);
+  border: 1px solid var(--sb-green);
+  flex: 1;
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+}
+
+/* --- PÁGINA 1: LOGIN --- */
+.login-view {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.login-image-side {
+  flex: 1;
+  height: 100vh;
+  background: url("https://i.pinimg.com/1200x/db/91/b8/db91b83c15a75cf6a49da42660251c53.jpg") no-repeat center 60%;
+  background-size: 100%;
+}
+
+.login-card {
+  text-align: center;
+  padding: 50px;
+  width: 450px;
+  background-color: var(--lilac);
+  position: relative;
+  border-radius: 0; 
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.logo-icon {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  font-size: 8rem;
+  display: inline-block;
+  transform-origin: 50% 80%;
+  animation: balanceo 3s ease-in-out infinite;
+}
+
+@keyframes balanceo {
+  0%, 100% {
+    transform: rotate(-8deg);
+  }
+
+  50% {
+    transform: rotate(8deg);
+  }
+}
+
+.login-title {
+  color: var(--azul-brigido);
+  paint-order: stroke fill;
+  font-family: "Climate Crisis", sans-serif;
+  font-size: 5rem;
+  margin: 0;
+  line-height: 1;
+}
+
+.title-group {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  text-align: left;
+}
+
+.title-b {
+  margin-top: -10px;
+}
+
+.title-c {
+  margin-top: -10px;
+}
+
+.login-card p {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  color: var(--azul-brigido);
+  font-weight: bold;
+}
+
+/* --- PÁGINA 2: DASHBOARD --- */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 40px;
-  background: var(--green-dark);
+  padding: 15px 40px;
+  margin-bottom: 30px;
+  border-radius: 0 0 12px 12px;
 }
-.brand { margin: 0; font-size: 1.3rem; color: var(--white); }
-.user-menu { display: flex; align-items: center; gap: 16px; }
-.greeting { color: rgba(255, 255, 255, 0.85); }
-.dashboard-header .btn-ghost { color: var(--white); border-color: rgba(255, 255, 255, 0.5); }
-.dashboard-header .btn-ghost:hover { background: rgba(255, 255, 255, 0.12); }
 
-/* Contenido */
-.dashboard-content { max-width: 960px; margin: 0 auto; padding: 40px 24px 64px; }
-.section-title { margin: 0 0 16px; font-size: 1.1rem; font-weight: 700; color: var(--green-dark); }
+.brand-small {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sb-green);
+}
 
-.controls { margin-bottom: 36px; padding: 24px; background: var(--white); border: 1px solid var(--line); border-left: 5px solid var(--green); border-radius: 16px; }
-.create-group { display: flex; gap: 12px; flex-wrap: wrap; }
-.input-modern, .select-modern {
-  padding: 11px 16px;
-  border: 1px solid var(--line);
-  border-radius: 50px;
-  background: var(--paper);
-  font-size: 0.95rem;
-  color: var(--ink);
+.brand-small h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.logo-icon-small {
+  font-size: 1.5rem;
+}
+
+.dashboard-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px 40px 20px;
+}
+
+/* CONTROLES TOP (Consultar y Crear) */
+.controls-card {
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.actions-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background-color: var(--gray-border);
+}
+
+.create-group {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+
+.input-modern {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
   outline: none;
 }
-.input-modern { flex: 1; min-width: 160px; }
-.select-modern { text-transform: capitalize; }
-.input-modern:focus, .select-modern:focus { border-color: var(--green); }
 
-.list-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.list-head .section-title { margin: 0; }
+.input-modern:focus {
+  border-color: var(--sb-green);
+}
 
-.notice { padding: 12px 0; color: var(--green); font-size: 0.95rem; }
-.notice-error { color: var(--danger); }
+/* CARGA Y ERROR */
+.loader-box {
+  padding: 15px;
+  text-align: center;
+  color: var(--sb-green);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
 
-/* Pedidos */
-.orders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.error-box {
+  padding: 15px;
+  background-color: #ffebee;
+  color: #c62828;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+/* GRILLA DE PEDIDOS */
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
 .order-card {
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-top: 4px solid var(--green);
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(30, 57, 50, 0.08);
 }
-.card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.order-number { color: var(--green); font-size: 0.95rem; font-weight: 700; }
-.product-name { margin: 0 0 4px; font-size: 1.15rem; font-weight: 600; }
-.order-location { margin: 0 0 20px; color: var(--muted); font-size: 0.9rem; text-transform: capitalize; }
-.card-actions { display: flex; gap: 8px; margin-top: auto; }
 
-/* Estados */
-.status-badge {
-  padding: 3px 12px;
-  border-radius: 50px;
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.order-number {
+  font-weight: bold;
+}
+
+.product-name {
+  margin: 0 0 20px 0;
+  font-size: 1.4rem;
+  color: var(--sb-green-light);
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* BADGES ESTADO */
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
   font-size: 0.75rem;
-  font-weight: 600;
-  background: #eceae4;
-  color: var(--muted);
+  font-weight: bold;
 }
-.status-badge.PREPARANDO { background: #fff1de; color: #b25e00; }
-.status-badge.LISTO, .status-badge.LISTO_PARA_RETIRO { background: var(--green-soft); color: var(--green); }
-.status-badge.CREADO { background: #e6eefb; color: #2456a6; }
-.status-badge.ENTREGADO { background: #eceae4; color: #9a978f; }
 
-.empty-state { padding: 48px 0; text-align: center; color: var(--muted); }
+.status-badge.PREPARANDO {
+  background-color: #fff3e0;
+  color: #e65100;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
 
-@media (max-width: 600px) {
-  .dashboard-header { padding: 14px 20px; }
-  .greeting { display: none; }
+.status-badge.LISTO_PARA_RETIRO {
+  background-color: #e8f5e9;
+  color: var(--sb-green);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.status-badge.ENTREGADO {
+  background-color: #f5f5f5;
+  color: #9e9e9e;
+  text-decoration: line-through;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+/* ESTADO VACÍO */
+.empty-state {
+  padding: 40px;
+  text-align: center;
+  color: #666;
+}
+
+/* --- FORMULARIO DE PEDIDO (tipo, ubicación, descripción, descafeinado) --- */
+.create-group {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.input-modern {
+  min-width: 160px;
+}
+
+.select-modern {
+  padding: 12px;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  background-color: #fff;
+  outline: none;
+  text-transform: capitalize;
+}
+
+.select-modern:focus {
+  border-color: var(--sb-green);
+}
+
+.decaf-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+  color: var(--sb-green-light);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.decaf-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--sb-green);
+  cursor: pointer;
+}
+
+/* --- TARJETA: ubicación, descafeinado y estado LISTO --- */
+.order-location {
+  margin: -10px 0 12px 0;
+  color: #777;
+  text-transform: capitalize;
+}
+
+.decaf-tag {
+  align-self: flex-start;
+  margin-bottom: 15px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background-color: #e8f5e9;
+  color: var(--sb-green);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.status-badge.LISTO {
+  background-color: #e8f5e9;
+  color: var(--sb-green);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
