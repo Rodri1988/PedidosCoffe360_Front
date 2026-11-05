@@ -27,9 +27,14 @@
 
     <!-- Barra superior -->
     <header class="dashboard-header shadow-glass">
-      <div class="brand-small">
-        <span class="logo-icon-small">☕</span>
-        <h2>Coffee 360</h2>
+      <div class="header-left">
+        <div class="brand-small clickable" role="button" tabindex="0" (click)="irA('home')" (keydown.enter)="irA('home')">
+          <span class="logo-icon-small">☕</span>
+          <h2>Coffee 360</h2>
+        </div>
+        <nav class="header-nav">
+          <button type="button" class="nav-link" [class.activo]="vista === 'pedidos'" (click)="irA('pedidos')">Pedidos</button>
+        </nav>
       </div>
       <div class="user-menu">
         <span class="greeting">Hola, <strong>{{usuario}}</strong></span>
@@ -37,7 +42,23 @@
       </div>
     </header>
 
-    <!-- Contenido Principal -->
+    <!-- HOME: imagen de bienvenida -->
+    @if (vista === 'home') {
+    <section class="home-view">
+      <div class="home-card shadow-glass">
+        <h1 class="login-title">Bienvenidos</h1>
+        <p class="home-text">
+          En Coffee 360 te ofrecemos espresso, americano, latte, capuccino y mocha, todos también en versión
+          descafeinada, además de nuestro café de especialidad. Preparamos cada taza con el aroma y el cuerpo
+          que mereces, para que disfrutes tu momento a tu propio ritmo.
+        </p>
+        <p class="home-productos">Espresso · Americano · Latte · Capuccino · Mocha</p>
+      </div>
+    </section>
+    }
+
+    <!-- PEDIDOS: Contenido Principal -->
+    @if (vista === 'pedidos') {
     <main class="dashboard-content">
 
       <!-- Tarjeta de Controles -->
@@ -53,11 +74,12 @@
 
           <!-- Formulario Crear: tipo, ubicación, descripción y descafeinado -->
           <div class="create-group">
-            <select [(ngModel)]="nuevoTipo" class="select-modern" [disabled]="cargandoPedidos">
+            <div class="tipo-chips" role="radiogroup" aria-label="Tipo de café">
               @for (t of tipos; track t) {
-              <option [value]="t">{{ t }}</option>
+              <button type="button" class="chip" role="radio" [attr.aria-checked]="nuevoTipo === t"
+                [class.activo]="nuevoTipo === t" [disabled]="cargandoPedidos" (click)="nuevoTipo = t">{{ t }}</button>
               }
-            </select>
+            </div>
             <input type="text" [(ngModel)]="nuevaUbicacion" placeholder="Ubicación (ej: Mesa 5)"
               class="input-modern" [disabled]="cargandoPedidos">
             <input type="text" [(ngModel)]="nuevaDescripcion" placeholder="Descripción (ej: Latte vainilla)"
@@ -114,6 +136,7 @@
       }
 
     </main>
+    }
   </div>
   }
 </div>

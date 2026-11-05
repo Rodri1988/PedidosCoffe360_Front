@@ -14,6 +14,7 @@ import { PedidosService } from './pedidos.service';
 export class App implements OnInit {
   usuario = '';
   autenticado = false;
+  vista: 'home' | 'pedidos' = 'home';
   pedidos: any[] = [];
   cargandoPedidos = false;
   errorPedidos = '';
@@ -36,6 +37,10 @@ export class App implements OnInit {
     });
   }
 
+  irA(vista: 'home' | 'pedidos') {
+    this.vista = vista;
+  }
+
   async login() {
     await signInWithRedirect();
   }
@@ -45,6 +50,7 @@ export class App implements OnInit {
     this.autenticado = false;
     this.pedidos = [];
     this.usuario = '';
+    this.vista = 'home';
     this.cdr.detectChanges(); // Actualiza la pantalla al instante
   }
 

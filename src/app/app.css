@@ -417,3 +417,115 @@
   font-size: 0.8rem;
   font-weight: bold;
 }
+
+
+/* --- NAVEGACIÓN: Home y Pedidos --- */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.brand-small.clickable {
+  cursor: pointer;
+}
+
+.brand-small.clickable:hover h2 {
+  text-decoration: underline;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 8px 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--sb-green-light);
+  cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.activo {
+  border-bottom-color: var(--sb-green);
+}
+
+/* --- HOME: imagen con título de bienvenida --- */
+.home-view {
+  min-height: calc(100vh - 130px);
+  margin: 0 20px 20px 20px;
+  border-radius: 12px;
+  background: url("https://i.pinimg.com/1200x/db/91/b8/db91b83c15a75cf6a49da42660251c53.jpg") no-repeat center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-card {
+  padding: 30px 50px;
+  text-align: center;
+}
+
+.home-card {
+  max-width: 620px;
+}
+
+.home-text {
+  margin: 20px 0 14px 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+.home-productos {
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  color: var(--sb-green-light);
+}
+
+/* Ajuste: el título de bienvenida debe caber dentro del cuadro */
+.home-card {
+  max-width: 760px;
+}
+
+.home-card .login-title {
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  max-width: 100%;
+}
+
+
+/* --- SELECCIÓN DE TIPO DE CAFÉ (chips) --- */
+.tipo-chips {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  padding: 8px 20px;
+  border: 1px solid var(--gray-border);
+  border-radius: 999px;
+  background-color: #fff;
+  color: var(--sb-green-light);
+  font-weight: bold;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.chip:hover:not(:disabled) {
+  border-color: var(--sb-green);
+}
+
+.chip.activo {
+  background-color: var(--amarillo-patito);
+  border-color: var(--sb-green);
+  color: var(--sb-green);
+}
+
+.chip:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
