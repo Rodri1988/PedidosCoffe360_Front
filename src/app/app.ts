@@ -105,7 +105,7 @@ export class App implements OnInit {
       tipo: this.nuevoTipo,
       ubicacion: this.nuevaUbicacion,
       descripcion: this.nuevaDescripcion,
-      decaf: this.nuevoDecaf,
+      decaf: !!this.nuevoDecaf,
       estado: 'PREPARANDO'
     };
     
