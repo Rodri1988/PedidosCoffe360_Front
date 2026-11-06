@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 @Injectable({ providedIn: 'root' })
 export class PedidosService {
     // Tu URL real de AWS API Gateway
-    private apiUrl = "http://localhost:8888/api/pedidos";
+    private apiUrl = "https://oaj3mpae82.execute-api.us-east-1.amazonaws.com/test/api/pedidos";
 
     constructor(private http: HttpClient) { }
 
