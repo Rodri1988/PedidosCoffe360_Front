@@ -14,10 +14,15 @@ import { PedidosService } from './pedidos.service';
 export class App implements OnInit {
   usuario = '';
   autenticado = false;
+  vista: 'home' | 'pedidos' = 'home';
   pedidos: any[] = [];
   cargandoPedidos = false;
   errorPedidos = '';
-  nuevoProducto = '';
+  nuevaUbicacion = '';
+  nuevaDescripcion = '';
+  nuevoDecaf = false;
+  tipos = ['espresso', 'americano', 'latte', 'capuccino', 'mocha'];
+  nuevoTipo = 'espresso';
 
   constructor(private pedidosService: PedidosService, private cdr: ChangeDetectorRef) {}
 
@@ -32,6 +37,10 @@ export class App implements OnInit {
     });
   }
 
+  irA(vista: 'home' | 'pedidos') {
+    this.vista = vista;
+  }
+
   async login() {
     await signInWithRedirect();
   }
@@ -41,13 +50,22 @@ export class App implements OnInit {
     this.autenticado = false;
     this.pedidos = [];
     this.usuario = '';
+    this.vista = 'home';
     this.cdr.detectChanges(); // Actualiza la pantalla al instante
   }
 
   async verSesion() {
     try {
       const user = await getCurrentUser();
-      this.usuario = user.username;
+      // Intentamos mostrar el nombre o email desde los claims del token;
+      // si no estan, caemos al username de Cognito.
+      try {
+        const session = await fetchAuthSession();
+        const claims: any = session.tokens?.idToken?.payload ?? {};
+        this.usuario = claims['name'] ?? claims['given_name'] ?? claims['email'] ?? user.username;
+      } catch {
+        this.usuario = user.username;
+      }
       this.autenticado = true;
       // NOTA: Aquí NO consultamos los pedidos automáticamente por petición tuya.
       this.cdr.detectChanges(); 
@@ -64,7 +82,7 @@ export class App implements OnInit {
 
     this.pedidosService.obtenerPedidos().subscribe({
       next: (data) => {
-        this.pedidos = data;
+        this.pedidos = data ?? [];
         this.cargandoPedidos = false;
         this.cdr.detectChanges(); // Dibuja los pedidos al instante
       },
@@ -78,19 +96,24 @@ export class App implements OnInit {
   }
 
   crearPedido() {
-    if (!this.nuevoProducto) return; 
+    if (!this.nuevaUbicacion || !this.nuevaDescripcion) return; 
     this.cargandoPedidos = true;
     this.cdr.detectChanges();
     
     const nuevo = {
       id: Math.floor(Math.random() * 1000) + 10, 
-      producto: this.nuevoProducto,
+      tipo: this.nuevoTipo,
+      ubicacion: this.nuevaUbicacion,
+      descripcion: this.nuevaDescripcion,
+      decaf: !!this.nuevoDecaf,
       estado: 'PREPARANDO'
     };
     
     this.pedidosService.crearPedido(nuevo).subscribe({
       next: () => {
-        this.nuevoProducto = ''; 
+        this.nuevaUbicacion = '';
+        this.nuevaDescripcion = '';
+        this.nuevoDecaf = false;
         this.consultarPedidos(); 
       },
       error: (error) => {
@@ -104,7 +127,7 @@ export class App implements OnInit {
   actualizarPedido(id: number, estadoActual: string) {
     this.cargandoPedidos = true;
     this.cdr.detectChanges();
-    const nuevoEstado = estadoActual === 'PREPARANDO' ? 'LISTO_PARA_RETIRO' : 'ENTREGADO';
+    const nuevoEstado = estadoActual === 'PREPARANDO' ? 'LISTO' : 'ENTREGADO';
     
     this.pedidosService.actualizarPedido(id, nuevoEstado).subscribe({
       next: () => this.consultarPedidos(),

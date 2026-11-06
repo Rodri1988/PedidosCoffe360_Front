@@ -4,8 +4,7 @@ import { HttpClient } from "@angular/common/http";
 @Injectable({ providedIn: 'root' })
 export class PedidosService {
     // Tu URL real de AWS API Gateway
-    // private apiUrl = "https://oaj3mpae82.execute-api.us-east-1.amazonaws.com/test/api/pedidos";
-    private apiUrl = "http://localhost:8888/api/pedidos"
+    private apiUrl = "http://localhost:8888/api/pedidos";
 
     constructor(private http: HttpClient) { }
 
@@ -25,6 +24,6 @@ export class PedidosService {
 
     // NUEVO: Método DELETE
     eliminarPedido(id: number) {
-        return this.http.delete<any>(`${this.apiUrl}/${id}`);
+        return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
     }
 }

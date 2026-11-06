@@ -214,6 +214,7 @@
   color: var(--azul-brigido);
   font-family: "Climate Crisis", sans-serif;
   position: relative;
+  cursor: pointer;
 }
 
 .brand-small h2 {
@@ -228,6 +229,23 @@
 
 .logo-icon-small {
   font-size: 2rem;
+}
+
+.nav-link {
+  font-family: "Climate Crisis", sans-serif;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  padding: 8px 4px;
+  color: var(--azul-brigido);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.activo {
+  border-bottom: 2px solid;
+  border-bottom-color: var(--azul-brigido);
 }
 
 .dashboard-content {
@@ -324,12 +342,6 @@
   font-weight: bold;
 }
 
-.product-name {
-  margin: 0 0 20px 0;
-  font-size: 1.4rem;
-  color: var(--azul-brigido);
-}
-
 .card-actions {
   display: flex;
   gap: 10px;
@@ -376,4 +388,210 @@
   padding: 40px;
   text-align: center;
   color: #666;
+}
+
+/* --- FORMULARIO DE PEDIDO (tipo, ubicación, descripción, descafeinado) --- */
+.create-group {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.input-modern {
+  min-width: 160px;
+}
+
+.select-modern {
+  padding: 12px;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  background-color: #fff;
+  outline: none;
+  text-transform: capitalize;
+}
+
+.select-modern:focus {
+  border-color: var(--sb-green);
+}
+
+.decaf-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+  color: var(--sb-green-light);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.decaf-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--sb-green);
+  cursor: pointer;
+}
+
+/* --- TARJETA: ubicación, descafeinado y estado LISTO --- */
+.order {
+  margin: -10px 0 12px 0;
+  text-transform: capitalize;
+  color: var(--azul-brigido);
+}
+
+.title-type {
+  font-family: "Climate Crisis", sans-serif;
+  font-size: 2rem;
+}
+
+.title-location {
+  font-size: 1.2rem;
+}
+
+.product-name {
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+  color: var(--azul-brigido);
+}
+
+.decaf-tag {
+  align-self: flex-start;
+  margin-bottom: 15px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background-color: var(--lilac);
+  color: var(--azul-brigido);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.status-badge.LISTO {
+  background-color: #e8f5e9;
+  color: var(--sb-green);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+
+/* --- NAVEGACIÓN: Home y Pedidos --- */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.brand-small.clickable {
+  cursor: pointer;
+}
+
+.brand-small.clickable:hover h2 {
+  text-decoration: underline;
+}
+
+/* --- HOME: imagen con título de bienvenida --- */
+.home-view {
+  min-height: calc(100vh - 130px);
+  margin: 0 20px 20px;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("/taza.jpg") center 37% / 105% no-repeat;
+}
+
+.welcome {
+  position: absolute;
+  top: 20px;
+  color: var(--lilac);
+  paint-order: stroke fill;
+  font-family: "Climate Crisis", sans-serif;
+  font-size: 5rem;
+  margin: 0;
+  line-height: 1;
+}
+
+.home-sides {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 1fr) 1fr;
+  align-items: center;
+  padding: 0 4%;
+  pointer-events: none;
+}
+
+.home-side {
+  color: #fff;
+  max-width: 280px;
+}
+
+.home-side:first-child {
+  grid-column: 1;
+  justify-self: start;
+  text-align: center;
+}
+
+.home-side:last-child {
+  grid-column: 3;
+  justify-self: end;
+  text-align: center;
+}
+
+.home-side h2 {
+  margin: 0 0 .4rem;
+  font-size: 1.4rem;
+}
+
+.home-side p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+  .home-sides {
+    display: none;
+  }
+}
+
+.home-productos {
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  color: var(--sb-green-light);
+}
+
+/* --- SELECCIÓN DE TIPO DE CAFÉ (chips) --- */
+.tipo-chips {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  padding: 8px 20px;
+  border: 1px solid var(--gray-border);
+  border-radius: 999px;
+  background-color: #fff;
+  color: var(--sb-green-light);
+  font-weight: bold;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.chip:hover:not(:disabled) {
+  border-color: var(--sb-green);
+}
+
+.chip.activo {
+  background-color: var(--amarillo-patito);
+  border-color: var(--sb-green);
+  color: var(--sb-green);
+}
+
+.chip:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }

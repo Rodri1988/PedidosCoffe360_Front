@@ -1,4 +1,4 @@
-<!-- FONDO GLOBAL ESTILO STARBUCKS -->
+<!-- FONDO GLOBAL -->
 <div class="app-background" [class.solido]="autenticado"></div>
 
 <div class="app-container">
@@ -25,12 +25,15 @@
   @else {
   <div class="dashboard-view">
 
-    <!-- Barra superior -->
     <header class="dashboard-header">
-      <div class="brand-small">
+      <div class="brand-small" role="button" tabindex="0" (click)="irA('home')" (keydown.enter)="irA('home')">
         <h2>PEDIDOS COFFEE 360</h2>
         <div class="coffee-icon nav-coffe">☕</div>
       </div>
+      <nav class="header-nav">
+        <button type="button" class="nav-link" [class.activo]="vista === 'pedidos'"
+          (click)="irA('pedidos')">Pedidos</button>
+      </nav>
       <div class="user-menu">
         <span class="greeting">Hola, <strong>{{usuario}}</strong></span>
         <button class="btn btn-outline" (click)="logout()">Cerrar Sesión</button>
@@ -38,6 +41,27 @@
     </header>
 
     <!-- Contenido Principal -->
+
+    <!-- HOME: imagen de bienvenida -->
+    @if (vista === 'home') {
+    <section class="home-view">
+      <h1 class="login-title welcome">Bienvenidos</h1>
+      <div class="home-sides">
+        <aside class="home-side">
+          <h2>Café de especialidad</h2>
+          <p>Preparado en el momento</p>
+        </aside>
+
+        <aside class="home-side">
+          <h2>Granos seleccionados</h2>
+          <p>Molidos al instante para cada taza.</p>
+        </aside>
+      </div>
+    </section>
+    }
+
+    <!-- PEDIDOS: Contenido Principal -->
+    @if (vista === 'pedidos') {
     <main class="dashboard-content">
 
       <!-- Tarjeta de Controles -->
@@ -51,12 +75,24 @@
 
           <div class="divider"></div>
 
-          <!-- Formulario Crear (A la derecha) -->
+          <!-- Formulario Crear: tipo, ubicación, descripción y descafeinado -->
           <div class="create-group">
-            <input type="text" [(ngModel)]="nuevoProducto" placeholder="Ej: Caramel Macchiato Venti"
+            <div class="tipo-chips" role="radiogroup" aria-label="Tipo de café">
+              @for (t of tipos; track t) {
+              <button type="button" class="chip" role="radio" [attr.aria-checked]="nuevoTipo === t"
+                [class.activo]="nuevoTipo === t" [disabled]="cargandoPedidos" (click)="nuevoTipo = t">{{ t }}</button>
+              }
+            </div>
+            <input type="text" [(ngModel)]="nuevaUbicacion" placeholder="Ubicación (ej: Mesa 5)" class="input-modern"
+              [disabled]="cargandoPedidos">
+            <input type="text" [(ngModel)]="nuevaDescripcion" placeholder="Descripción (ej: Latte vainilla)"
               class="input-modern" [disabled]="cargandoPedidos">
-            <button class="btn btn-dark" (click)="crearPedido()" [disabled]="cargandoPedidos || !nuevoProducto">
-              Crear pedido</button>
+            <label class="decaf-check">
+              <input type="checkbox" [(ngModel)]="nuevoDecaf" [disabled]="cargandoPedidos">
+              Descafeinado
+            </label>
+            <button class="btn btn-dark" (click)="crearPedido()"
+              [disabled]="cargandoPedidos || !nuevaUbicacion || !nuevaDescripcion">➕ Crear</button>
           </div>
 
         </div>
@@ -64,10 +100,7 @@
 
       <!-- Alertas y Carga -->
       @if (cargandoPedidos) {
-      <div class="loader-box shadow-glass">
-        Conectando con la barra...
-        <div class="coffee-icon">☕</div>
-      </div>
+      <div class="loader-box shadow-glass">☕ Conectando con la barra...</div>
       }
       @if (errorPedidos) {
       <div class="error-box shadow-glass">⚠️ {{errorPedidos}}</div>
@@ -79,14 +112,14 @@
         <article class="order-card shadow-glass">
           <div class="card-head">
             <span class="order-number">#{{pedido.id}}</span>
-            <span class="status-badge" [class]="pedido.estado">{{pedido.estado.replace('_', ' ')}}</span>
+            <span class="status-badge" [class]="pedido.estado">{{pedido.estado?.replace('_', ' ')}}</span>
           </div>
-
-          <!-- Nombres de café dinámicos para los pedidos antiguos sin nombre -->
-          <h3 class="product-name">
-            {{ pedido.producto ? pedido.producto : '☕ ' + (['Caramel Macchiato', 'Latte Vainilla', 'Espresso Americano',
-            'Mocha Blanco', 'Frappuccino', 'Cappuccino'][pedido.id % 6]) }}
-          </h3>
+          <p class="order title-type">{{ pedido.tipo }}</p>
+          <h2 class="order title-location">{{ pedido.ubicacion }}</h2>
+          <p class="product-name">{{ pedido.descripcion }}</p>
+          @if (pedido.decaf) {
+          <span class="decaf-tag">Descafeinado</span>
+          }
 
           <div class="card-actions">
             <button class="btn btn-action" (click)="actualizarPedido(pedido.id, pedido.estado)"
@@ -101,11 +134,12 @@
       <!-- Mensaje si la lista está vacía -->
       @if (pedidos.length === 0 && !cargandoPedidos) {
       <div class="empty-state shadow-glass">
-        <p>La barra está limpia. Presiona "Consultar Pedidos" para revisar la base de datos.</p>
+        <p>La barra está limpia. Presiona "Consultar Pedidos" para revisar los pedidos.</p>
       </div>
       }
 
     </main>
+    }
   </div>
   }
 </div>
